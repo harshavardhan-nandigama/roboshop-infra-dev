@@ -1,5 +1,9 @@
 #!/bin/bash
+set -e
+set -x  # enables command tracing
 
 component=$1
-dnf install ansible -y
-ansible-pull -U https://github.com/harshavardhan-nandigama/ansible-roles-tf.git -e component=$1 -e env=$2 main.yaml
+env=$2
+
+dnf install -y git ansible
+ansible-pull -U https://github.com/harshavardhan-nandigama/ansible-roles-tf.git -e component=$component -e env=$env main.yaml
